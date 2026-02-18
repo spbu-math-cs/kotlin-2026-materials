@@ -265,7 +265,20 @@ TODO
 
 ### [Практика 5](practices/practice-05.md)
 
-- Reflection
+- исключения
+  - try
+  - catch
+  - finally
+- продвинутые конструкции языка
+  - extension функции
+  - infix функции
+  - операторы
+  - delegate-properties
+- generic-s
+  - type bounds
+  - invariant
+  - covariant
+- annotations
 
 ### [Практика 6](practices/practice-06.md)
 
@@ -282,20 +295,7 @@ TODO
 
 ### [Практика 7](practices/practice-07.md)
 
-- исключения
-  - try
-  - catch
-  - finally
-- продвинутые конструкции языка
-  - extension функции
-  - infix функции
-  - операторы
-  - delegate-properties
-- generic-s
-  - type bounds
-  - invariant
-  - covariant
-- annotations
+- Reflection
 
 ### [Практика 8](practices/practice-08.md)
 
