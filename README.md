@@ -14,7 +14,8 @@
 
 #### Домашки
 
-- выдаются после практик в первой части курса
+- выполняются на GitHub Classrooms
+- выдаются раз в одну/две недели
 - время на выполнение -- две недели
 - могут быть бонусные баллы
 - после дедлайна оцениваются в 50%
@@ -22,7 +23,7 @@
 - баллы за домашку `hw = student_points / hw_points`
   - `hw_points` -- сумма обязательных баллов за домашки
   - `student_points` -- сумма баллов за домашки студента с учетом бонусных баллов
-- Плагиат/ЛЛМка -- 0 баллов
+- плагиат/ЛЛМка -- 0 баллов
 
 #### Проект
 
@@ -192,7 +193,7 @@ TODO
 
 ## Практики
 
-### [Практика 1](lectures/practice-01.md)
+### [Практика 1](practices/practice-01.md)
 
 - IntellijIDEA
 - hello world
@@ -206,7 +207,7 @@ TODO
   - функции
   - лямбды
 
-### [Практика 2](lectures/practice-02.md)
+### [Практика 2](practices/practice-02.md)
 
 - null-safety:
   - ?.
@@ -240,7 +241,7 @@ TODO
     - pipeline
     - asSequence
 
-### [Практика 3](lectures/practice-03.md)
+### [Практика 3](practices/practice-03.md)
 
 - cli
   - установка JDK
@@ -251,7 +252,7 @@ TODO
   - compile classpath
   - runtime classpath
 
-### [Практика 4](lectures/practice-04.md)
+### [Практика 4](practices/practice-04.md)
 
 - maven
 - gradle
@@ -262,11 +263,11 @@ TODO
   - conventional plugins
   - публикация
 
-### [Практика 5](lectures/practice-05.md)
+### [Практика 5](practices/practice-05.md)
 
 - Reflection
 
-### [Практика 6](lectures/practice-06.md)
+### [Практика 6](practices/practice-06.md)
 
 - принцип SOLID
 - основные паттерны разработки
@@ -279,7 +280,7 @@ TODO
   - proxy
   - etc.
 
-### [Практика 7](lectures/practice-07.md)
+### [Практика 7](practices/practice-07.md)
 
 - исключения
   - try
@@ -296,7 +297,7 @@ TODO
   - covariant
 - annotations
 
-### [Практика 8](lectures/practice-08.md)
+### [Практика 8](practices/practice-08.md)
 
 - CoroutineContext
 - CoroutineScope
@@ -307,40 +308,40 @@ TODO
   - async
   - coroutineScope
 
-### [Практика 9](lectures/practice-09.md)
+### [Практика 9](practices/practice-09.md)
 
 - Channel
 - Flow
 
-### [Практика 10](lectures/practice-10.md)
+### [Практика 10](practices/practice-10.md)
 
 - Spring
 
-### [Практика 11](lectures/practice-11.md)
+### [Практика 11](practices/practice-11.md)
 
 - Spring
 
-### [Практика 12](lectures/practice-12.md)
+### [Практика 12](practices/practice-12.md)
 
 - JDBC
 - JOOQ
 - JPA
 - Hibernate
 
-### [Практика 13](lectures/practice-13.md)
+### [Практика 13](practices/practice-13.md)
 
 - логгирование
 - мониторинг
 - контейнеризация
 
-### [Практика 14](lectures/practice-14.md)
+### [Практика 14](practices/practice-14.md)
 
 - Android-разработка
   - MVVM
   - JetPack Compose
   - DI: Dagger, Hilt, Koin
 
-### [Практика 15](lectures/practice-15.md)
+### [Практика 15](practices/practice-15.md)
 
 - Android-разработка p2
 
