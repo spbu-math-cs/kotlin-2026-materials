@@ -1,0 +1,138 @@
+# Template GitHub Actions workflow for Kotlin/Gradle homeworks.
+#
+# How to use:
+# 1) Copy this file into a конкретное ДЗ репозитория as:
+#    `.github/workflows/check-solution.yml`
+# 2) Students ALWAYS clone a standalone homework repository.
+#    Therefore the workflow MUST run from repo root:
+#    - do NOT use `working-directory`
+#    - run Gradle as `./gradlew :task-01:test` etc.
+#
+# --- Why a single job? ---
+# We intentionally run ALL module checks as separate *steps* in one job.
+# This guarantees that module checks do NOT depend on each other (no `needs:`)
+# and will run independently even if one of them fails.
+#
+# Each module step MUST have:
+# - `id: ...`
+# - `continue-on-error: true`
+# so that later steps (including summary) still run.
+
+name: Check solution
+
+on:
+  pull_request:
+
+permissions:
+  contents: read
+  pull-requests: write
+
+concurrency:
+  group: check-solution-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  checks:
+    name: Checks (all modules)
+    runs-on: ubuntu-latest
+
+    # Teacher-defined points per step id (JSON object)
+    # NOTE: keys must match step `id` values.
+    env:
+      # IMPORTANT: keys must match step `id` values.
+      # Step ids cannot contain '-', so we use task_01, task_02, ...
+      POINTS_JSON: '{"task_01":2,"task_02":4,"task_03":4}'
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - uses: gradle/actions/setup-gradle@v4
+
+      # 1) Warm-up: assemble with a strict timeout.
+      - name: Warm-up (assemble)
+        timeout-minutes: 4
+        run: ./gradlew assemble
+
+      # 2) Module checks (add/remove steps per module)
+      # IMPORTANT:
+      # - each check is independent
+      # - keep `continue-on-error: true`
+      # - give each step a stable `id`
+
+      - name: task-01 (checks)
+        id: task_01
+        timeout-minutes: 1
+        continue-on-error: true
+        run: ./gradlew :task-01:test
+
+      - name: task-02 (checks)
+        id: task_02
+        timeout-minutes: 1
+        continue-on-error: true
+        run: ./gradlew :task-02:test
+
+      - name: task-03 (checks)
+        id: task_03
+        timeout-minutes: 1
+        continue-on-error: true
+        run: ./gradlew :task-03:test
+
+      # 3) Summary as a separate step (always runs)
+      - name: Build markdown summary
+        if: ${{ always() }}
+        shell: bash
+        env:
+          # You still need to list module steps explicitly here.
+          RESULTS_JSON: '{"task_01":"${{ steps.task_01.outcome }}","task_02":"${{ steps.task_02.outcome }}","task_03":"${{ steps.task_03.outcome }}"}'
+        run: |
+          python3 - <<'PY'
+          import json
+          import os
+
+          def load_json_env(name: str) -> dict:
+            raw = os.environ.get(name, "")
+            if not raw:
+              return {}
+            return json.loads(raw)
+
+          points = load_json_env("POINTS_JSON")
+          results = load_json_env("RESULTS_JSON")
+
+          def passed(result: str) -> bool:
+            return result == "success"
+
+          rows = []
+          total = 0
+
+          # Preserve POINTS_JSON order (Python 3.7+ keeps insertion order)
+          for step_id, max_points in points.items():
+            res = results.get(step_id, "skipped")
+            ok = passed(res)
+            got = max_points if ok else 0
+            total += got
+            rows.append((step_id, str(ok).lower(), f"{got} / {max_points}"))
+
+          out = []
+          out.append("## CI results")
+          out.append("")
+          out.append("| Module | Passed | Points |")
+          out.append("|---|---:|---:|")
+          out.extend([f"| {m} | {p} | {pts} |" for (m, p, pts) in rows])
+          out.append(f"| **Total** |  | **{total}** |")
+          out.append("")
+
+          with open('summary.md', 'w', encoding='utf-8') as f:
+            f.write("\n".join(out))
+          PY
+
+      - name: Comment PR
+        if: ${{ always() }}
+        uses: marocchino/sticky-pull-request-comment@v2
+        with:
+          header: check-solution
+          path: summary.md
