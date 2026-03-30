@@ -274,14 +274,13 @@ TODO
   - infix функции
   - операторы
   - delegate-properties
+
+### [Практика 6](practices/practice-06.md)
+
 - generic-s
   - type bounds
   - invariant
   - covariant
-- annotations
-
-### [Практика 6](practices/practice-06.md)
-
 - принцип SOLID
 - основные паттерны разработки
   - visitor
@@ -296,6 +295,7 @@ TODO
 ### [Практика 7](practices/practice-07.md)
 
 - Reflection
+- annotations
 
 ### [Практика 8](practices/practice-08.md)
 
