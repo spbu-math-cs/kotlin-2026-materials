@@ -312,6 +312,7 @@ TODO
 
 - Channel
 - Flow
+- Actor
 
 ### [Практика 10](practices/practice-10.md)
 
