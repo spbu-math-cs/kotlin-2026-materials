@@ -316,7 +316,7 @@ TODO
 
 ### [Практика 10](practices/practice-10.md)
 
-- Spring
+- Ktor
 
 ### [Практика 11](practices/practice-11.md)
 
