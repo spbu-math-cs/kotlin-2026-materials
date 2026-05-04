@@ -354,7 +354,7 @@ https://classroom.github.com/a/pTXj6HBf
 
 ### Домашка 2
 
-TODO
+https://classroom.github.com/a/4pX3U5mN
 
 ### Домашка 3
 
